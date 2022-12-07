@@ -16,20 +16,15 @@ detector.loadModel()
 
 app = Flask(__name__)
 cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route('/detect', methods=['POST', 'OPTIONS'])
 @cross_origin()
 def predict():
-    if request.method == "OPTIONS": # CORS preflight
-        return _build_cors_preflight_response()
-
-
     # get form data with key 'file' from the request using request.form.get('file')
-    videoFile = request.files['file']
-    videoFile.save('video.mp4')
-    video_path = detector.detectObjectsFromVideo(input_file_path=os.path.join(execution_path, "video.mp4"),
+    # videoFile = request.files['file']
+    # videoFile.save('video.mp4')
+    video_path = detector.detectObjectsFromVideo(input_file_path=os.path.join(execution_path, "sample1.mp4"),
                                                     output_file_path=os.path.join(execution_path, "traffic_detected"), frames_per_second=20, log_progress=True)
 
     # print(video_path)
@@ -61,15 +56,3 @@ def home():
     <h1>API is up and running!</h1>
     <p>Send a POST request to /predict with a video file to get the predicted class</p>
     </div>"""
-
-
-def _build_cors_preflight_response():
-    response = make_response()
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    response.headers.add('Access-Control-Allow-Headers', "*")
-    response.headers.add('Access-Control-Allow-Methods', "*")
-    return response
-
-def _corsify_actual_response(response):
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    return response
