@@ -15,7 +15,7 @@ detector.loadModel()
 app = Flask(__name__)
 
 
-@app.route('/detect', methods=['POST'])
+@app.route('/predict', methods=['POST'])
 def predict():
     # this method receives form data from the client which is video file
     # and returns the predicted class
