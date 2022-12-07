@@ -24,7 +24,7 @@ def predict():
     file = request.files['file']
     # save the file to disk
     file.save('video.mp4')
-    video_path = detector.detectObjectsFromVideo(input_file_path=os.path.join(execution_path, "video.mp4"),
+    video_path = detector.detectObjectsFromVideo(input_file_path=os.path.join(execution_path, "sample1.mp4"),
                                                  output_file_path=os.path.join(execution_path, "traffic_detected"), frames_per_second=20, log_progress=True)
     print(video_path)
     return json.dumps(video_path)
@@ -35,5 +35,8 @@ def predict():
 
 @app.route('/')
 def home():
-    return "<h1>Next Word Predictor</h1>"
+    return """<div>
+    <h1>API is up and running!</h1>
+    <p>Send a POST request to /predict with a video file to get the predicted class</p>
+    </div>"""
 
