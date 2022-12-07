@@ -24,8 +24,19 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def predict():
     if request.method == "OPTIONS": # CORS preflight
         return _build_cors_preflight_response()
-    # this method receives form data from the client which is video file
-    # and returns the predicted class
+
+
+    # get form data with key 'file' from the request using request.form.get('file')
+    videoFile = request.files['file']
+    videoFile.save('video.mp4')
+    video_path = detector.detectObjectsFromVideo(input_file_path=os.path.join(execution_path, "video.mp4"),
+                                                    output_file_path=os.path.join(execution_path, "traffic_detected"), frames_per_second=20, log_progress=True)
+
+    # print(video_path)
+    # return type of video_path
+    typeIs = type(video_path)
+    return typeIs
+
 
 
 
@@ -37,7 +48,7 @@ def predict():
     #                                              output_file_path=os.path.join(execution_path, "traffic_detected"), frames_per_second=20, log_progress=True)
     # print(video_path)
     # send {message: 'success'}
-    return json.dumps({'message': 'success'})
+    # return json.dumps({'message': 'success'})
 
 
 # defalut route
