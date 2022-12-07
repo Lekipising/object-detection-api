@@ -23,11 +23,10 @@ def predict():
     # get form data with key 'file' from the request using request.form.get('file')
     videoFile = request.files['file']
     videoFile.save('video.mp4')
-    # video_path = detector.detectObjectsFromVideo(input_file_path=os.path.join(execution_path, "video.mp4"),
-                                                    # output_file_path=os.path.join(execution_path, "traffic_detected"), frames_per_second=20, log_progress=True)
+    video_path = detector.detectObjectsFromVideo(input_file_path=os.path.join(execution_path, "video.mp4"),
+                                                    output_file_path=os.path.join(execution_path, "traffic_detected"), frames_per_second=20, log_progress=True)
 
-    sampleMessage = "success"
-    return json.dumps({'message': sampleMessage})
+    return json.dumps(video_path)
 
 
 @app.route('/')
