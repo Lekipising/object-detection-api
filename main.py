@@ -13,7 +13,6 @@ detector.setModelPath(os.path.join(
 detector.loadModel()
 
 app = Flask(__name__)
-app.config["DEBUG"] = True
 
 
 @app.route('/predict', methods=['POST'])
