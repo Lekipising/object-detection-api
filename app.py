@@ -23,31 +23,13 @@ def predict():
     execution_path, "model.h5"))
     detector.loadModel()
     # get form data with key 'file' from the request using request.form.get('file')
-    # videoFile = request.files['file']
-    # videoFile.save('video.mp4')
-    video_path = detector.detectObjectsFromVideo(input_file_path=os.path.join(execution_path, "sample1.mp4"),
-                                                    output_file_path=os.path.join(execution_path, "traffic_detected"), frames_per_second=20, log_progress=True)
+    videoFile = request.files['file']
+    videoFile.save('video.mp4')
+    # video_path = detector.detectObjectsFromVideo(input_file_path=os.path.join(execution_path, "video.mp4"),
+                                                    # output_file_path=os.path.join(execution_path, "traffic_detected"), frames_per_second=20, log_progress=True)
 
-    # print(video_path)
-    # return type of video_path
-    typeIs = type(video_path)
-    return typeIs
-
-
-
-
-    # get the file from the request
-    # file = request.files['file']
-    # save the file to disk
-    # file.save('video.mp4')
-    # video_path = detector.detectObjectsFromVideo(input_file_path=os.path.join(execution_path, "sample1.mp4"),
-    #                                              output_file_path=os.path.join(execution_path, "traffic_detected"), frames_per_second=20, log_progress=True)
-    # print(video_path)
-    # send {message: 'success'}
-    # return json.dumps({'message': 'success'})
-
-
-# defalut route
+    sampleMessage = "success"
+    return json.dumps({'message': sampleMessage})
 
 
 @app.route('/')
