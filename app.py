@@ -19,7 +19,7 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-@app.route('/predict', methods=['POST', 'OPTIONS'])
+@app.route('/detect', methods=['POST', 'OPTIONS'])
 @cross_origin()
 def predict():
     if request.method == "OPTIONS": # CORS preflight
