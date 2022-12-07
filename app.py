@@ -3,11 +3,9 @@ import json
 from flask_cors import CORS, cross_origin
 from flask import (
     Flask,
-    request,
-    make_response
+    request
 )
 import os
-
 
 app = Flask(__name__)
 cors = CORS(app)
