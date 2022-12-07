@@ -13,3 +13,4 @@ protobuf==3.17.3
 flask
 gunicorn
 waitress
+flask-cors
