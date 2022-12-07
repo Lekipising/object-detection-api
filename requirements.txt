@@ -12,3 +12,4 @@ keras-resnet==0.2.0
 protobuf==3.17.3
 flask
 gunicorn
+waitress
