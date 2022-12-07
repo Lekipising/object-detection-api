@@ -7,12 +7,7 @@ from flask import (
     make_response
 )
 import os
-execution_path = os.getcwd()
-detector = VideoObjectDetection()
-detector.setModelTypeAsTinyYOLOv3()
-detector.setModelPath(os.path.join(
-    execution_path, "model.h5"))
-detector.loadModel()
+
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -21,6 +16,12 @@ cors = CORS(app)
 @app.route('/detect', methods=['POST', 'OPTIONS'])
 @cross_origin()
 def predict():
+    execution_path = os.getcwd()
+    detector = VideoObjectDetection()
+    detector.setModelTypeAsTinyYOLOv3()
+    detector.setModelPath(os.path.join(
+    execution_path, "model.h5"))
+    detector.loadModel()
     # get form data with key 'file' from the request using request.form.get('file')
     # videoFile = request.files['file']
     # videoFile.save('video.mp4')
