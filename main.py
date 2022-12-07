@@ -9,7 +9,7 @@ execution_path = os.getcwd()
 detector = VideoObjectDetection()
 detector.setModelTypeAsTinyYOLOv3()
 detector.setModelPath(os.path.join(
-    execution_path, "yolo-tiny.h5"))
+    execution_path, "model.h5"))
 detector.loadModel()
 
 app = Flask(__name__)
