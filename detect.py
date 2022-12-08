@@ -25,6 +25,7 @@ def detector(userInput, videoPath):
     userChoice = userInput
     inPath = ""
     userChoiceFound = False
+    allDetectedClasses = []
 
     while (cap.isOpened()):
         frameId = cap.get(1)  # current frame number
@@ -48,6 +49,9 @@ def detector(userInput, videoPath):
             top3 = decode_predictions(preds, top=3)[0]
 
             for result in top3:
+                if result[1] not in allDetectedClasses:
+                    allDetectedClasses.append(result[1])
+
                 if userChoice == result[1]:
                     userChoiceFound = True
                     if top_result is None:
@@ -61,6 +65,9 @@ def detector(userInput, videoPath):
         # get jpg image at file path and convert to base64
         with open(inPath, "rb") as img_file:
             my_string = base64.b64encode(img_file.read())
-        return my_string
+        resultDict = {"base64": my_string,
+                      "classes": allDetectedClasses}
+        return resultDict
     else:
-        return False
+        print(allDetectedClasses)
+        return {"base64": False, "classes": allDetectedClasses}
