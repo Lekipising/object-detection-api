@@ -24,6 +24,7 @@ def detector(userInput, videoPath):
 
     userChoice = userInput
     inPath = ""
+    userChoiceFound = False
 
     while (cap.isOpened()):
         frameId = cap.get(1)  # current frame number
@@ -48,6 +49,7 @@ def detector(userInput, videoPath):
 
             for result in top3:
                 if userChoice == result[1]:
+                    userChoiceFound = True
                     if top_result is None:
                         top_result = result
 
@@ -55,7 +57,10 @@ def detector(userInput, videoPath):
                         top_result = result
                         inPath = filename
 
-    # get jpg image at file path and convert to base64
-    with open(inPath, "rb") as img_file:
-        my_string = base64.b64encode(img_file.read())
-    return my_string
+    if userChoiceFound:
+        # get jpg image at file path and convert to base64
+        with open(inPath, "rb") as img_file:
+            my_string = base64.b64encode(img_file.read())
+        return my_string
+    else:
+        return False
