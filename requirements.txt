@@ -1,4 +1,3 @@
-imageai
 tensorflow
 tensorflow-gpu
 keras
