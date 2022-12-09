@@ -32,3 +32,6 @@ def home():
     <h1>API is up and running!</h1>
     <p>Send a POST request to /predict with a video file to get the predicted class</p>
     </div>"""
+
+
+app.run()
