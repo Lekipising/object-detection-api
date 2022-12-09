@@ -1,10 +1,9 @@
+from detect import detector
 import json
 from flask_cors import CORS, cross_origin
 from flask import (
     Flask, request
 )
-
-from detect import detector
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -19,7 +18,10 @@ def predict():
     userInput = json.loads(userInput.read())
     userInput = userInput['json']
     videoFile.save('video.mp4')
+    # save the video file to the server using os
+    print("Received request....")
     base64 = detector(userInput, "video.mp4")
+    print("Done!")
     if base64['base64'] is False:
         return json.dumps({'base64': "No match found", 'classes': base64["classes"]})
     return json.dumps({'base64': base64["base64"].decode('utf-8')})

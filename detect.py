@@ -9,6 +9,8 @@ import base64
 
 
 def detector(userInput, videoPath):
+    print('received request for: ' + userInput)
+    print('received request for path: ' + videoPath)
     # load the model
     model = InceptionV3(weights='imagenet')
 
