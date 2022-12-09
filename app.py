@@ -5,8 +5,20 @@ from flask import (
     Flask, request
 )
 
+import logging
+
 app = Flask(__name__)
 cors = CORS(app)
+
+
+gunicorn_logger = logging.getLogger('gunicorn.error')
+app.logger.handlers = gunicorn_logger.handlers
+
+
+if __name__ != '__main__':
+    gunicorn_logger = logging.getLogger('gunicorn.error')
+    app.logger.handlers = gunicorn_logger.handlers
+    app.logger.setLevel(gunicorn_logger.level)
 
 
 @app.route('/detect', methods=['POST', 'OPTIONS'])
@@ -19,9 +31,9 @@ def predict():
     userInput = userInput['json']
     videoFile.save('video.mp4')
     # save the video file to the server using os
-    print("Received request....")
+    app.logger.info('Video file saved')
     base64 = detector(userInput, "video.mp4")
-    print("Done!")
+    app.logger.info('Video file processed')
     if base64['base64'] is False:
         return json.dumps({'base64': "No match found", 'classes': base64["classes"]})
     return json.dumps({'base64': base64["base64"].decode('utf-8')})
@@ -34,3 +46,7 @@ def home():
     <h1>API is up and running!</h1>
     <p>Send a POST request to /predict with a video file to get the predicted class</p>
     </div>"""
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8000, debug=True)
