@@ -4,9 +4,9 @@ This is a flask API that uses Google Inception V3 deep learning model to detect 
 
 The flask endpoint `/detect` accepts a video file amd returns a frame with the detected objects.
 
-The API is deployed on Render and can be accessed on https://object-detect.onrender.com/detect
+The API is deployed on Render and can be accessed on https://object-detect.onrender.com
 
-The API is consumed by a frontend that is used in the followin way:
+The API is consumed by a frontend that is used in the following way:
 
 1. Upload a video file
 2. Type an object in the video
