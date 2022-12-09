@@ -20,3 +20,11 @@ The following GIF shows the frontend in action:
 ![Object Detection](/gif.gif)
 
 ## To play with the frontend, visit [https://detect-object-app.vercel.app](https://detect-object-app.vercel.app/)
+
+
+## Project Contributors
+This project was developed by:
+- Adio Roheem
+- Modester Mwangi
+- Brenda Gilisho
+- Liplan Lekipising
