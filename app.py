@@ -5,6 +5,8 @@ from flask import (
     Flask, request
 )
 
+import os
+
 import logging
 
 app = Flask(__name__)
@@ -49,4 +51,4 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(debug=True, port=os.getenv("PORT", default=5000))
