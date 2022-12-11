@@ -1,4 +1,3 @@
-from keras.applications.inception_v3 import InceptionV3
 # import keras.utils as image
 from keras.preprocessing import image
 from keras.applications.inception_v3 import preprocess_input, decode_predictions
@@ -7,12 +6,12 @@ import cv2
 import math
 import base64
 
+# load the model
 
-def detector(userInput, videoPath):
+
+def detector(userInput, videoPath, model):
     print('received request for: ' + userInput)
     print('received request for path: ' + videoPath)
-    # load the model
-    model = InceptionV3(weights='imagenet')
 
     # Load video
     # capturing the video from the given path

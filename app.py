@@ -5,6 +5,7 @@ from flask import (
     Flask, request
 )
 
+from keras.applications.inception_v3 import InceptionV3
 import os
 
 import logging
@@ -16,6 +17,8 @@ cors = CORS(app)
 gunicorn_logger = logging.getLogger('gunicorn.error')
 app.logger.handlers = gunicorn_logger.handlers
 
+model = InceptionV3(weights='imagenet')
+print('model loaded')
 
 if __name__ != '__main__':
     gunicorn_logger = logging.getLogger('gunicorn.error')
@@ -34,7 +37,7 @@ def predict():
     videoFile.save('video.mp4')
     # save the video file to the server using os
     app.logger.info('Video file saved')
-    base64 = detector(userInput, "video.mp4")
+    base64 = detector(userInput, "video.mp4", model)
     app.logger.info('Video file processed')
     if base64['base64'] is False:
         return json.dumps({'base64': "No match found", 'classes': base64["classes"]})
